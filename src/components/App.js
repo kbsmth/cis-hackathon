@@ -33,7 +33,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ height: '100vh', width: '100vw' }}>
         <div style={{ height: '119px', display: 'flex', justifyContent: 'start', alignItems: 'center', borderBottom: '1px solid rgb(230, 232, 232)', padding: '0 40px'}}>
           <div>
             <img src={brain} style={{ height: '57px', width: '57px'}}></img>
@@ -45,7 +45,7 @@ class App extends React.Component {
             <div style={{ fontSize: '20px', fontFamily: 'CiscoSans', color: 'color: rgb(83, 87, 89)' }}>Virtual Client Meeting: Jose Bogarin</div>
             <div style={{ fontSize: '16px', fontFamily: 'CiscoSans', color: 'color: rgb(23, 27, 31)' }}>September 19, 2019</div>
             <div style={{ marginTop: '40px', fontSize: '20px', fontWeight: 500,  fontFamily: 'CiscoSans', color: 'color: rgb(23, 27, 31)' }}>Cognitive Sentiment Report</div>
-            <div style={{ width: '100%', height: '68px' }}>
+            <div style={{ width: '100%', height: '10vh' }}>
               <Trend data={this.state.data} />
             </div>
             <div style={{ width: '100%', display: 'flex', justifyContent: 'center', padding: '50px'}}>

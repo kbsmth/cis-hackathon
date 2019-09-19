@@ -180,7 +180,7 @@ class Trend extends React.Component {
                   onTimeRangeChanged={this.handleTimeRangeChange}
                   hideTimeAxis={true}
                 >
-                  <ChartRow height="70" debug={false}>
+                  <ChartRow height="120" debug={false}>
                     <Charts>
                       <AreaChart
                         axis="sentiments"
