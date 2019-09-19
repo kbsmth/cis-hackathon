@@ -3,33 +3,50 @@ import { NavLink, Route, Switch } from "react-router-dom";
 
 import AboutPage from "./AboutPage";
 import FuelSavingsPage from "./containers/FuelSavingsPage";
+import Trend from "./Trend";
+import RadialChartGraph from "./containers/RadialChartGraph";
 import HomePage from "./HomePage";
 import NotFoundPage from "./NotFoundPage";
 import PropTypes from "prop-types";
 import React from "react";
 import { hot } from "react-hot-loader";
-
+import _ from 'lodash';
+import brain from '../styles/brain.svg';
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
 // component at the top-level.
 
 class App extends React.Component {
+  state = {
+    data: null
+  }
+
+  componentDidMount() {
+    fetch('https://3fae308b.ngrok.io/api/v1/sentiment/1')
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ data: _.takeRight(data.items, 300) })
+    }
+    );
+  }
+
   render() {
-    const activeStyle = { color: 'blue' };
     return (
       <div>
+        <div style={{ height: '119px', display: 'flex', justifyContent: 'start', alignItems: 'center', borderBottom: '1px solid rgb(230, 232, 232)', padding: '0 40px'}}>
+          <div>
+            <img src={brain} style={{ height: '57px', width: '57px'}}></img>
+          </div>
+          <div style={{ fontSize: '32px', fontFamily: 'CiscoSans', marginLeft: '21px', color: 'color: rgb(23, 27, 31)' }}>Smart Bank</div>
+        </div>
         <div>
-          <NavLink exact to="/" activeStyle={activeStyle}>Home</NavLink>
-          {' | '}
-          <NavLink to="/fuel-savings" activeStyle={activeStyle}>Demo App</NavLink>
-          {' | '}
-          <NavLink to="/about" activeStyle={activeStyle}>About</NavLink>
+          <div>
+            <Trend data={this.state.data} />
+            <RadialChartGraph/>
+          </div>
         </div>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/fuel-savings" component={FuelSavingsPage} />
-          <Route path="/about" component={AboutPage} />
-          <Route component={NotFoundPage} />
         </Switch>
       </div>
     );
