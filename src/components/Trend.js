@@ -177,7 +177,9 @@ class Trend extends React.Component {
                   minTime={sentiment.range().begin()}
                   minDuration={1000 * 60 * 60}
                   onBackgroundClick={() => this.setState({ selection: null })}
-                  onTimeRangeChanged={this.handleTimeRangeChange}>
+                  onTimeRangeChanged={this.handleTimeRangeChange}
+                  hideTimeAxis={true}
+                >
                   <ChartRow height="70" debug={false}>
                     <Charts>
                       <AreaChart
