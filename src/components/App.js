@@ -6,6 +6,7 @@ import FuelSavingsPage from "./containers/FuelSavingsPage";
 import Trend from "./Trend";
 import RadialChartGraph from "./containers/RadialChartGraph";
 import HomePage from "./HomePage";
+import lineChart from "./lineChart";
 import NotFoundPage from "./NotFoundPage";
 import PropTypes from "prop-types";
 import React from "react";
@@ -23,6 +24,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    lineChart
+    .tooltipThreshold(600)
+    .height(300)
+    .width(containerWidth)
+    .grid('full');
+
+    container.datum(dataset).call(lineChart);
+    
     fetch('https://e42643b2.ngrok.io/api/v1/sentiment/1')
     .then(response => response.json())
     .then(data => {
@@ -41,19 +50,34 @@ class App extends React.Component {
           <div style={{ fontSize: '32px', fontFamily: 'CiscoSans', marginLeft: '21px', color: 'color: rgb(23, 27, 31)' }}>Smart Bank</div>
         </div>
         <div style={{ margin: '33px 48px', display: 'flex', flexFlow: 'row nowrap' }}>
-          <div style={{width: '50%'}}>
-            <div style={{ fontSize: '20px', fontFamily: 'CiscoSans', color: 'color: rgb(83, 87, 89)' }}>Virtual Client Meeting: Jose Bogarin</div>
-            <div style={{ fontSize: '16px', fontFamily: 'CiscoSans', color: 'color: rgb(23, 27, 31)' }}>September 19, 2019</div>
-            <div style={{ marginTop: '40px', fontSize: '20px', fontWeight: 500,  fontFamily: 'CiscoSans', color: 'color: rgb(23, 27, 31)' }}>Cognitive Sentiment Report</div>
-            <div style={{ width: '100%', height: '10vh' }}>
-              <Trend data={this.state.data} />
+          <div className="container" id="line">
+            <div className="row">
+              <div className="col-md-8">
+                <article>
+                  <h2>Line Chart with fixed Aspect Ratio</h2>
+                  <div className="js-line-chart-container line-chart-container card--chart" />
+                  <div className="js-line-brush-chart-container card--chart" />
+                  <p className="js-date-range date-range is-hidden">Selected from <span className="js-start-date"></span> to <span className="js-end-date"></span></p>
+                </article>
+              </div>
+              <div className="col-md-4 sidebar">
+                <h3>The code</h3>
+                <pre>
+                  <code className="language-javascript"></code>
+                </pre>
+                <h4>Demo Code</h4>
+                <p>Read the whole code of this demo <a href="https://github.com/eventbrite/britecharts/blob/master/demos/src/demo-line.js">in github</a></p>
+              </div>
             </div>
-            <div style={{ width: '100%', display: 'flex', justifyContent: 'center', padding: '50px'}}>
-              <RadialChartGraph/>
+            <div className="row">
+              <div className="col-md-8">
+                <article>
+                  <a name="loading-state"></a>
+                  <h2 className="tutorial__heading">Loading State</h2>
+                  <div className="js-loading-container"></div>
+                </article>
+              </div>
             </div>
-          </div>
-          <div style={{width: '50%'}}>
-            <img src={voicea} height='829px' width='505px'></img>
           </div>
         </div>
         <Switch>
