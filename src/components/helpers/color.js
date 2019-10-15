@@ -11,6 +11,7 @@ export const colorGradientsHuman = {
 };
 
 // Color Schemas
+// KEVIN MAKE CHANGES HERE
 // Standard Color Schema for Britecharts
 export const britecharts = [
     '#6aedc7', //green
